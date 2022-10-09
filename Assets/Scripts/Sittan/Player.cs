@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] bool isAlive = false;
+    [SerializeField] bool isAlive = true;
 
 
     Rigidbody Rigidbody;
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         Move(h, v);
-        Breath();
+        //Breath();
     }
 
     void Move(float h, float v)
