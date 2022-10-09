@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
+
     public static GameManager Instance
     {
         get
@@ -40,5 +42,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void WinGame()
+    {
+        Debug.Log("Win Game");
+    }
+
+    public void DefeatGame()
+    {
+        Debug.Log("Defeat Game");
     }
 }
