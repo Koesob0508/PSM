@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         Move(h, v);
-        //Breath();
+        Breath();
     }
 
     void Move(float h, float v)
