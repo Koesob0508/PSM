@@ -61,5 +61,6 @@ public class Player : MonoBehaviour
         if (!isAlive) return;
 
         isAlive = false;
+        GameManager.Instance.DefeatGame();
     }
 }
