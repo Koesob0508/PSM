@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ship : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Ship : MonoBehaviour
     private static Ship instance;
     private Rigidbody shipRigidbody;
     public float accelAmount;
+    public Slider resourceSlider;
+    public float totalResource;
+    public float currentResource;
     public static Ship Instane
     {
         get
@@ -36,6 +40,7 @@ public class Ship : MonoBehaviour
         }
 
         shipRigidbody = gameObject.GetComponent<Rigidbody>();
+        currentResource = totalResource;
     }
 
     private void Start()
@@ -57,12 +62,34 @@ public class Ship : MonoBehaviour
     {
         Vector3 velocity = new Vector3(0, 0, accelAmount);
         shipRigidbody.AddForce(velocity, ForceMode.Acceleration);
+
+        UseResource(30f);
     }
 
     private IEnumerator TestBoost()
     {
-        yield return new WaitForSeconds(3f);
+        for(int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(3f);
 
-        Accel();
+            Accel();
+        }
+    }
+
+    private bool UseResource(float _amount)
+    {
+        if((currentResource - _amount) > 0)
+        {
+            currentResource = currentResource - _amount;
+
+            resourceSlider.value = currentResource / totalResource;
+
+            return true;
+        }
+        else
+        {
+            Debug.Log("연료가 부족합니다.");
+            return false;
+        }
     }
 }
