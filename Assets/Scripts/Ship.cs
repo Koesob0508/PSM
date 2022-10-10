@@ -7,6 +7,8 @@ public class Ship : MonoBehaviour
     public GameObject frontWall;
 
     private static Ship instance;
+    private Rigidbody shipRigidbody;
+    public float accelAmount;
     public static Ship Instane
     {
         get
@@ -32,6 +34,13 @@ public class Ship : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        shipRigidbody = gameObject.GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(TestBoost());
     }
 
     public void EnterPlayer()
@@ -42,5 +51,18 @@ public class Ship : MonoBehaviour
     public void ExitPlayer()
     {
         frontWall.SetActive(true);
+    }
+
+    public void Accel()
+    {
+        Vector3 velocity = new Vector3(0, 0, accelAmount);
+        shipRigidbody.AddForce(velocity, ForceMode.Acceleration);
+    }
+
+    private IEnumerator TestBoost()
+    {
+        yield return new WaitForSeconds(3f);
+
+        Accel();
     }
 }
