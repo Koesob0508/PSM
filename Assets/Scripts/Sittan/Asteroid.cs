@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    [SerializeField] GameObject fuelObject;
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         var collision = other.GetComponent<ICollisionable>();
@@ -28,7 +16,9 @@ public class Asteroid : MonoBehaviour
 
     private void Destroy()
     {
-        Instantiate(fuelObject).transform.position = gameObject.transform.position;
+        var fuelObject = Resources.Load<GameObject>("Prefabs/Fuel");
+        if (fuelObject != null)
+            Instantiate(fuelObject).transform.position = gameObject.transform.position;
 
         Destroy(this.gameObject);
     }
