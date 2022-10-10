@@ -35,4 +35,9 @@ public class AccelButton : MonoBehaviour
     {
 
     }
+
+    IEnumerator OnButtonCoroutine()
+    {
+        yield return null;
+    }
 }
